@@ -59,5 +59,5 @@ while (exit == 'y') :
 
 
     print("Word : ", js[0]["word"])
-    print("Word : ", js[0]["meaning"])
+    print("Meaning : ", js[0]["meaning"])
     exit = input("Enter 'y' to roll again : ")
