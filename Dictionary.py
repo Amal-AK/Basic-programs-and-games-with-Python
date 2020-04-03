@@ -44,8 +44,12 @@ while (exit == 'y') :
 
     serviceurl = 'https://googledictionaryapi.eu-gb.mybluemix.net/?'
     url = serviceurl + urllib.parse.urlencode(parms)
-    print("======================= WE ARE SEARCHING ============================ ")
-    data = urllib.request.urlopen(url)
+    print("\n============================================ WE ARE SEARCHING ====================================================\n ")
+    try :
+        data = urllib.request.urlopen(url)
+    except :
+        print("Error, check if the word is corect or exist , then check if you are connected to internet ")
+        quit()
     try:
         js = json.loads(data.read())
     except:
@@ -57,7 +61,27 @@ while (exit == 'y') :
 
 # printing the result -----------------------------------------------------------------------------------------------------------------------------
 
+# if we use english
+    if (x==1) :
+        print("Word serched  : ", js[0]["word"])
+        tab1 = list(js[0]["meaning"])
+        for l in tab1 :
+            print("\n",l , ": \n")
+            tab2 = list(js[0]["meaning"][l][0])
+            for z in tab2 :
+                print("   - " ,z , " : " , js[0]["meaning"][l][0][z])
 
-    print("Word : ", js[0]["word"])
-    print("Meaning : ", js[0]["meaning"])
-    exit = input("Enter 'y' to roll again : ")
+# if we use french , because the struct is diff
+    if (x==2) :
+            print("Le mot recherché  : ", js[0]["word"])
+            tab1 = list(js[0]["meaning"])
+            for l in tab1 :
+                print("\n",l , ":  Définitions" )
+                tab2 = list(js[0]["meaning"][l]["definitions"])
+                for w in tab2 :
+                    if (len(w["definition"])!= 0 ) : print("\n")
+                    tab3= list(w)
+                    for t in tab3 :
+                        if (len(w[t]) != 0) :
+                            print("   - " , t , " : " , w[t])
+    exit = input("\n Enter 'y' to roll again : ")
