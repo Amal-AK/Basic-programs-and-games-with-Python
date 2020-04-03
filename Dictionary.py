@@ -63,25 +63,21 @@ while (exit == 'y') :
 
 # if we use english
     if (x==1) :
-        print("Word serched  : ", js[0]["word"])
-        tab1 = list(js[0]["meaning"])
-        for l in tab1 :
-            print("\n",l , ": \n")
-            tab2 = list(js[0]["meaning"][l][0])
-            for z in tab2 :
-                print("   - " ,z , " : " , js[0]["meaning"][l][0][z])
-
+        print(" => the word you want to search : " , js[0]["word"] , "\n")
+        for k ,v in (js[0]["meaning"]).items() :
+            print('\n   ', k)
+            for k1 , v1 in v[0].items() :
+                print("\t\t-",k1 , ': ',v1 )
+        print("\n")
 # if we use french , because the struct is diff
     if (x==2) :
-            print("Le mot recherché  : ", js[0]["word"])
-            tab1 = list(js[0]["meaning"])
-            for l in tab1 :
-                print("\n",l , ":  Définitions" )
-                tab2 = list(js[0]["meaning"][l]["definitions"])
-                for w in tab2 :
-                    if (len(w["definition"])!= 0 ) : print("\n")
-                    tab3= list(w)
-                    for t in tab3 :
-                        if (len(w[t]) != 0) :
-                            print("   - " , t , " : " , w[t])
-    exit = input("\n Enter 'y' to roll again : ")
+            print(" => Le mot recherché  : ", js[0]["word"])
+            for k ,v in js[0]["meaning"].items() :
+                print("\t" ,k , ": définitions\n")
+                for k1 , v1 in v.items() :
+                    for item in v1 :
+                        for k2 , v2 in item.items() :
+                            if (len(v2)!=0 and v2[0]!= '') : print("\t  -", k2 ,':', v2)
+                        if (len(item['definition'])!= 0) : print('\n')
+
+    exit = input("  Enter 'y' to roll again : ")
